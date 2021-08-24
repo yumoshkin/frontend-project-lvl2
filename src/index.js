@@ -1,17 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
+import parse from './parsers.js';
 
 const getData = (filepath) => {
   const fp = path.resolve(filepath);
   const type = path.extname(fp).slice(1);
   const data = fs.readFileSync(fp, 'utf8');
 
-  if (type === 'json') {
-    return JSON.parse(data);
-  }
-
-  return data;
+  return parse(data, type);
 };
 
 const genDiff = (filepath1, filepath2) => {

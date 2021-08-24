@@ -4,7 +4,6 @@ import _ from 'lodash';
 
 const getData = (filepath) => {
   const fp = path.resolve(filepath);
-  console.log('fp', fp);
   const type = path.extname(fp).slice(1);
   const data = fs.readFileSync(fp, 'utf8');
 
@@ -36,7 +35,7 @@ const genDiff = (filepath1, filepath2) => {
     }
   });
 
-  return result;
+  return _.replace(JSON.stringify(result, null, 2), /"/g, '');
 };
 
 export default genDiff;

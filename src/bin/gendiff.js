@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import _ from 'lodash';
 import commander from 'commander';
 import genDiff from '../index.js';
 
@@ -11,7 +10,7 @@ commander
   .arguments('<filepath1> <filepath2>')
   .action((filepath1, filepath2) => {
     const result = genDiff(filepath1, filepath2, commander.format);
-    console.log(`\n${_.replace(JSON.stringify(result, null, 2), /"/g, '')}\n`);
+    console.log(`\n${result}\n`);
   });
 
 commander.parse(process.argv);

@@ -12,7 +12,6 @@ const getData = (filepath) => {
     return JSON.parse(data);
   }
 
-  clg;
   return data;
 };
 
@@ -30,12 +29,10 @@ const genDiff = (filepath1, filepath2) => {
       result = { ...result, [`- ${key}`]: value1 };
     } else if (!_.has(data1, key) && _.has(data2, key)) {
       result = { ...result, [`+ ${key}`]: value2 };
+    } else if (value1 !== value2) {
+      result = { ...result, [`- ${key}`]: value1, [`+ ${key}`]: value2 };
     } else {
-      if (value1 !== value2) {
-        result = { ...result, [`- ${key}`]: value1, [`+ ${key}`]: value2 };
-      } else {
-        result = { ...result, [`  ${key}`]: value1 };
-      }
+      result = { ...result, [`  ${key}`]: value1 };
     }
   });
 
